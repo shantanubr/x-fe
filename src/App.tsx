@@ -20,14 +20,17 @@ function App() {
 
   const sendTweet = async () => {
     try {
-      const response = await fetch("http://localhost:3001/twitter-api/tweets", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "YourTwitterAuthorizationHeaderHere",
-        },
-        body: JSON.stringify({ text: tweetString }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/twitter-api/tweets`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "YourTwitterAuthorizationHeaderHere",
+          },
+          body: JSON.stringify({ text: tweetString }),
+        }
+      );
 
       const data = await response.json();
       setResponse(data);
