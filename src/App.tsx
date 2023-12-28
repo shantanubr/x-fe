@@ -21,7 +21,7 @@ function App() {
   const sendTweet = async () => {
     try {
       const response = await fetch(
-        `https://x-be.vercel.app/twitter-api/tweets`,
+        `${process.env.REACT_APP_BASE_URL}/twitter-api/tweets`,
         {
           method: "POST",
           headers: {
