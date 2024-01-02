@@ -28,7 +28,10 @@ function App() {
             "Content-Type": "application/json",
             Authorization: "YourTwitterAuthorizationHeaderHere",
           },
-          body: JSON.stringify({ text: tweetString }),
+          body: JSON.stringify({
+            text: tweetString,
+            secretCode: process.env.REACT_APP_SECRET_CODE,
+          }),
         }
       );
 
@@ -69,7 +72,7 @@ function App() {
             </div>
           )}
           <input
-            type="text"
+            type="password"
             value={secretCode}
             onChange={(e) => setSecretCode(e.target.value)}
           />
