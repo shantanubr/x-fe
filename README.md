@@ -14,12 +14,12 @@ The backend for this application is written in Node. You can find the code for t
 ### Run Locally
 Install the node_modules
 ```
-$ yarn install
+yarn install
 ```
 
 Run the project
 ```
-$ yarn start
+yarn start
 ```
 
 #
