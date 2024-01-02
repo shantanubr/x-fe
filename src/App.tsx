@@ -30,7 +30,7 @@ function App() {
           },
           body: JSON.stringify({
             text: tweetString,
-            secretCode: process.env.REACT_APP_SECRET_CODE,
+            secretCode: secretCode,
           }),
         }
       );
