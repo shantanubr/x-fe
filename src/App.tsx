@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -8,6 +8,7 @@ function App() {
 
   const [tweetString, setTweetString] = useState<string>("");
   const [response, setResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleGetIn = () => {
     if (secretCode !== process.env.REACT_APP_SECRET_CODE) {
@@ -19,6 +20,7 @@ function App() {
   };
 
   const sendTweet = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BASE_URL}/twitter-api/tweets`,
@@ -42,6 +44,12 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    if (response) {
+      setLoading(false);
+    }
+  }, [response])
+
   return (
     <div className="flex flex-col h-screen w-full items-center justify-center bg-[#202020]">
       {isAuthenticated ? (
@@ -61,9 +69,14 @@ function App() {
             className="border mt-4 text-white p-1 px-2 rounded-md">
             SEND TWEET
           </button>
+          {loading && (
+            <div className="flex items-center mt-4">
+              <h2>{`Sending tweet...`}</h2>
+            </div>
+          )}
           {response && (
             <div className="flex items-center mt-4">
-              <h2>{`Server Response: Tweet Sent!`}</h2>
+              <h2>{`Tweet Sent!`}</h2>
             </div>
           )}
         </div>
