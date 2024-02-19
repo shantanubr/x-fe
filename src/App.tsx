@@ -62,7 +62,7 @@ function App() {
             SEND TWEET
           </button>
           {response && (
-            <div className="flex items-center">
+            <div className="flex items-center mt-4">
               <h2>{`Server Response: Tweet Sent!`}</h2>
             </div>
           )}
