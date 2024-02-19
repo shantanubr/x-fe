@@ -43,14 +43,18 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col h-screen w-screen items-center justify-center bg-[#202020]">
+    <div className="flex flex-col h-screen w-full items-center justify-center bg-[#202020]">
       {isAuthenticated ? (
-        <div className="text-white flex flex-col">
+        <div className="text-white flex flex-col w-full items-center">
           <p>Tweet here...</p>
           <textarea
             value={tweetString}
             onChange={(e) => setTweetString(e.target.value)}
-            className="bg-[#151515] mt-2 w-full"
+            className="bg-[#151515] mt-2 w-10/12 sm:w-1/2 h-40"
+            onKeyDown={(e) => {
+              if (e.key === "Enter")
+                sendTweet();
+            }}
           />
           <button
             onClick={sendTweet}
@@ -58,9 +62,8 @@ function App() {
             SEND TWEET
           </button>
           {response && (
-            <div>
-              <h2>Server Response:</h2>
-              <pre>{JSON.stringify(response, null, 2)}</pre>
+            <div className="flex items-center">
+              <h2>{`Server Response: Tweet Sent!`}</h2>
             </div>
           )}
         </div>
@@ -75,6 +78,10 @@ function App() {
             type="password"
             value={secretCode}
             onChange={(e) => setSecretCode(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter")
+                handleGetIn();
+            }}
           />
           <button
             onClick={handleGetIn}
