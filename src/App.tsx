@@ -20,6 +20,7 @@ function App() {
   };
 
   const sendTweet = async () => {
+    if (tweetString.length < 1) return;
     setLoading(true);
     try {
       const response = await fetch(
@@ -39,6 +40,7 @@ function App() {
 
       const data = await response.json();
       setResponse(data);
+      setTweetString('');
     } catch (error) {
       console.error("Error:", error);
     }
@@ -57,12 +59,11 @@ function App() {
           <p>Tweet here...</p>
           <textarea
             value={tweetString}
-            onChange={(e) => setTweetString(e.target.value)}
-            className="bg-[#151515] mt-2 w-10/12 sm:w-1/2 h-40"
-            onKeyDown={(e) => {
-              if (e.key === "Enter")
-                sendTweet();
+            onChange={(e) => {
+              setTweetString(e.target.value);
+              setResponse(null);
             }}
+            className="bg-[#151515] mt-2 w-10/12 sm:w-1/2 h-40"
           />
           <button
             onClick={sendTweet}
